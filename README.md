@@ -1,5 +1,9 @@
-HDML 2014 Final Project -- Kernel Methods Tutorial
+HDML 2014 Final Project
 ==========
 
-TODO
+# Kernel Methods Tutorial
+
+## Contents
+
+- TODO
 
