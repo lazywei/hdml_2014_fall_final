@@ -1,0 +1,92 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+
+\setCJKmainfont{LiHei Pro}
+\XeTeXlinebreaklocale zh
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+% ------ For pasting codes ------
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+% -----------------------------------
+
+\begin{document}
+
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+
+\title{Tutorial: Kernel Methods}
+\author{Chih-Wei Chang B00201037\\
+Chung-Yen Hung B00201015}
+\maketitle
+
+\begin{abstract}
+  Here comes the Abstract
+\end{abstract}
+
+\section{Introduction to Kerenl Method}
+\subsection{What Is Kernel and Kernel Trick}
+\subsection{Why Use Kernel and How Kernel Can Be Used}
+
+\section{Common Kernel}
+\subsection{Conditions To Be A Valid Kerenl}
+\subsection{Hilber Space and RKHS}
+\subsection{Polynomial Kernel}
+\subsection{Gaussian Kernel}
+
+\section{Kernel Machines}
+\subsection{Kernel PCA}
+\subsection{Kernel SVM}
+\subsection{Kerenl Ridge Regression}
+\subsection{Kernel Logistic Regression}
+
+\section{Output Kernel}
+\subsection{Kernel in Output Space}
+\subsection{PLST and CPLST}
+\subsection{Other Possible Output Kernel Techniques}
+
+\section{Conclusion}
+Here comes the Conclusion
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+
+\end{document}
