@@ -15,6 +15,20 @@
 \XeTeXlinebreaklocale zh
 \XeTeXlinebreakskip = 0pt plus 1pt
 
+% ------ Thm. Def. etc. ---------
+
+% Theorem Styles
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+% Definition Styles
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
 % ------ For pasting codes ------
 \usepackage{listings}
 \usepackage{color}
@@ -61,8 +75,27 @@ Chung-Yen Hung B00201015}
 \subsection{Why Use Kernel and How Kernel Can Be Used}
 
 \section{Common Kernel}
-\subsection{Conditions To Be A Valid Kerenl}
 \subsection{Hilber Space and RKHS}
+\begin{definition}[Inner Product Space]
+  An inner product space \(\mathcal{X}\) is a vector space with an associated inner product \(\langle \cdot,\cdot \rangle: \mathcal{X} \rightarrow \mathbb{R}\) that satisfies:
+  \begin{itemize}
+    \item Symmetry: \(\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle\)
+    \item Linearity: \(\langle a \cdot \mathbf{x}, \mathbf{y} \rangle = a \cdot \langle \mathbf{x}, \mathbf{y} \rangle\) and \(\langle \mathbf{w} + \mathbf{x}, \mathbf{y} \rangle =  \langle \mathbf{w}, \mathbf{y} \rangle + \langle \mathbf{x}, \mathbf{y} \rangle\)
+    \item Positive Semi-Definiteness: \( \langle \mathbf{x}, \mathbf{x} \rangle \geq 0 \)
+  \end{itemize}
+  The inner product space is strict if \( \langle \mathbf{x}, \mathbf{x} \rangle = 0 \) iff \( \mathbf{x} = 0 \)
+\end{definition}
+
+\begin{definition}[Hilbert Space]
+  A strict inner product space \(\mathcal{F}\) is a Hilbert space if it is:
+  \begin{itemize}
+    \item Complete: Every Cauchy sequence \(\{ h_i \in \mathcal{F} \}_{i=1}^\infty\) converges to an element \(h \in \mathcal{F}\)
+    \item Separable: There is a countable subset \( \mathcal{\hat{F}} = \{ h_i \in \mathcal{F} \}_{i=1}^\infty \) such that for all \(h \in \mathcal{F}\) and \(\epsilon > 0 \), there exists \(h_i \in \mathcal{\hat{F}}\) such that \(\| h_i - h\| < \epsilon\).
+  \end{itemize}
+\end{definition}
+
+The interval \([0, 1]\), the reals \(\mathbb{R}\), the complex numbers \(\mathbb{C}\) and Euclidean spaces \(\mathbb{R}^D\) are all Hilber spaces.
+\subsection{Kerenl Function}
 \subsection{Polynomial Kernel}
 The polynomial kernel is define as 
 $$ 
