@@ -97,24 +97,22 @@ Chung-Yen Hung B00201015}
 The interval \([0, 1]\), the reals \(\mathbb{R}\), the complex numbers \(\mathbb{C}\) and Euclidean spaces \(\mathbb{R}^D\) are all Hilber spaces.
 \subsection{Kerenl Function}
 \subsection{Polynomial Kernel}
-The polynomial kernel is define as 
-$$ 
-K_{\Phi_{d}}(x, y) = {(< x,y > + \alpha)}^{d}
-$$\par
+The polynomial kernel is defined as
+\[
+  K_{\Phi_{d}}(x, y) = {(\langle x,y \rangle + \alpha)}^{d}
+\]
 As a kernel, K corresponds to an inner product in a feature space based on some mapping:
-$$ 
-K_{\Phi_{d}}(x, y) = <\Phi_{d}(x), \Phi_{d}(y)>
-$$\par
-Let $ d=2 $, so we get the special case of the quadratic kernel
-
-$$
-K(x, y) = {(\sum_{i=1}^{n} x_{i}y_{i} + \alpha)}^{2} = \sum_{i=1}^{n}(x_{i}^{2})(y_{i}^{2}) + \sum_{i=2}^{n}\sum_{j=1}^{i-1}(\sqrt{2}x_{i}x_{j})(\sqrt{2}y_{i}y_{j}) + \sum_{i=1}^{n}(\sqrt{2c}x_{i})(\sqrt{2c}y_{i})
-$$\par
-
+\[
+  K_{\Phi_{d}}(x, y) = \langle \Phi_{d}(x), \Phi_{d}(y) \rangle
+\]
+Let \( d=2 \), so we get the special case of the quadratic kernel
+\[
+  K(x, y) = (\sum_{i=1}^{n} x_{i}y_{i} + \alpha)^{2} = \sum_{i=1}^{n}(x_{i}^{2})(y_{i}^{2}) + \sum_{i=2}^{n}\sum_{j=1}^{i-1}(\sqrt{2}x_{i}x_{j})(\sqrt{2}y_{i}y_{j}) + \sum_{i=1}^{n}(\sqrt{2c}x_{i})(\sqrt{2c}y_{i})
+\]
 From this it follows that the feature map is given by:
-$$
-\Phi_{2}(x) = <x_{n}^{2},\dots,x_{1}^{2},\sqrt{2}x_{n}x_{n-1},\dots,\sqrt{2}x_{n}x_{1},\sqrt{2}x_{n-1}x_{n-2},\dots,\sqrt{2c}x_{n},\dots,\sqrt{2c}x_{1},c>
-$$
+\[
+\Phi_{2}(x) = \langle x_{n}^{2},\dots,x_{1}^{2},\sqrt{2}x_{n}x_{n-1},\dots,\sqrt{2}x_{n}x_{1},\sqrt{2}x_{n-1}x_{n-2},\dots,\sqrt{2c}x_{n},\dots,\sqrt{2c}x_{1},c \rangle
+\]
 
 
 \subsection{Gaussian Kernel}
