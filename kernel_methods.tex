@@ -72,6 +72,8 @@ Chung-Yen Hung B00201015}
 
 \section{Introduction to Kernel Method}
 \subsection{What Is Kernel and Kernel Trick}
+Kernel method is an assumption that using an transform so that a point set which is no linear separable in lower dimension can be linear separable in highter dimension. But there is a problem: compution is complex if we move those points to the high-dimension.\par
+Kernel Trick is using kernel function $ K(x1,x2) = <\phi(x_{1}), \phi(x_{2})> $ where $x_{1}$ and $x_{2}$ are in the low-dimension. $ \phi$ is a transform for points from low-dimension to hight-dimension. Kernel trick can let compution be easy, because we just compute their kernel function inner product.
 \subsection{Why Use Kernel and How Kernel Can Be Used}
 
 \section{Common Kernel}
