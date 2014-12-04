@@ -67,7 +67,7 @@ Chung-Yen Hung B00201015}
 \maketitle
 
 \begin{abstract}
-  Here comes the Abstract
+  The most common machine learning models are usually linear. Linear model possess some advantages such as simple, efficient, and computationally feasible. Real world data analysis problems, on the other hand, are rarely linear --- they usually require nonlinear models to describe the sophisticated interdependencies behind the data. One way to solve this problem is mapping features to higher dimensional space. After the mapping, we simply apply linear models in that space, which in turn give nonlinear models in the original lower dimensional space. However, mapping features to higher dimensional space also increase the computational cost, the inner product, for example. The higher the dimension, the harder the computation. Kernel methods, luckily, provide a mathematical shortcut for us to prevent calculating the inner product directly. In other words, kernel methods give us the ability to fit sophisticated models while still have the computational feasibility at the same time.
 \end{abstract}
 
 \section{Introduction to Kernel Method}
@@ -75,6 +75,7 @@ Chung-Yen Hung B00201015}
 Kernel method is an assumption that using an transform so that a point set which is no linear separable in lower dimension can be linear separable in highter dimension. But there is a problem: compution is complex if we move those points to the high-dimension.\par
 Kernel Trick is using kernel function $ K(x1,x2) = <\phi(x_{1}), \phi(x_{2})> $ where $x_{1}$ and $x_{2}$ are in the low-dimension. $ \phi$ is a transform for points from low-dimension to hight-dimension. Kernel trick can let compution be easy, because we just compute their kernel function inner product.
 \subsection{Why Use Kernel and How Kernel Can Be Used}
+As mentioned previously,
 
 \section{Common Kernel}
 \subsection{Hilber Space and RKHS}
@@ -97,7 +98,8 @@ Kernel Trick is using kernel function $ K(x1,x2) = <\phi(x_{1}), \phi(x_{2})> $ 
 \end{definition}
 
 The interval \([0, 1]\), the reals \(\mathbb{R}\), the complex numbers \(\mathbb{C}\) and Euclidean spaces \(\mathbb{R}^D\) are all Hilber spaces.
-\subsection{Kerenl Function}
+\subsection{Kernel Function}
+Just for temporal note: Maybe state and discuss Mercer's condition here.
 \subsection{Polynomial Kernel}
 The polynomial kernel is defined as
 \[
