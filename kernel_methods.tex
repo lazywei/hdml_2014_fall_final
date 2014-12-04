@@ -71,18 +71,29 @@ Chung-Yen Hung B00201015}
 \end{abstract}
 
 \section{Introduction to Kernel Method}
+
 \subsection{Feature Transformation}
 Feature transformation provides us a way to tackle on sophisticated data. Take the quadratic transformation from \(\mathbb{R}^2\) to \(\mathbb{R}^6\) as an instance, which can be defined by:
 \[
-  \varphi: (x_1, x_2) \mapsto (x_1^2, x_2^2, x_1 x_2, x_1, x_2, 1).
+  \Phi: (x_1, x_2) \mapsto (x_1^2, x_2^2, \sqrt{2} x_1 x_2, \sqrt{2} x_1, \sqrt{2} x_2, 1).
 \]
-Note that a straight line in the special space actually corresponds to a quadratic curve in the original space \(\mathbb{R}^2\). It implies that we can get a nonlinear model in the original space by fitting a linear model in \(\mathbb{R}^6\). In this way, any linear model can be extended to a nonlinear model. To be specific, we fit linear model on transformed data \(\varphi(\mathbf{x})\) and get a hypothesis \(h: \mathbb{R}^6 \rightarrow \{0, 1\} \). After that, when new testing data \(\mathbf{x}_{test}\) arriving,  \(h(\varphi(\mathbf{x}_{test}))\) gives the prediction.
+Note that a straight line in the special space actually corresponds to a quadratic curve in the original space \(\mathbb{R}^2\). It implies that we can get a nonlinear model in the original space by fitting a linear model in \(\mathbb{R}^6\). In this way, any linear model can be extended to a nonlinear model. To be specific, we fit linear model on transformed data \(\Phi(\mathbf{x})\) and get a hypothesis \(h: \mathbb{R}^6 \rightarrow \{0, 1\} \). After that, when new testing data \(\mathbf{x}_{test}\) arriving,  \(h(\Phi(\mathbf{x}_{test}))\) gives the prediction.
 
-\subsection{What Is Kernel and Kernel Trick}
-Kernel method is an assumption that using an transform so that a point set which is no linear separable in lower dimension can be linear separable in highter dimension. But there is a problem: compution is complex if we move those points to the high-dimension.\par
-Kernel Trick is using kernel function $ K(x1,x2) = <\phi(x_{1}), \phi(x_{2})> $ where $x_{1}$ and $x_{2}$ are in the low-dimension. $ \phi$ is a transform for points from low-dimension to hight-dimension. Kernel trick can let compution be easy, because we just compute their kernel function inner product.
-\subsection{Why Use Kernel and How Kernel Can Be Used}
-As mentioned previously,
+\subsection{Kernel Trick}
+While feature transformation seems promising --- the model can be extremely sophisticated as long as we make the dimension of the transformed space higher --- the price is the expensive computational cost. The computational difficulty also makes the infinity dimensional transformation impossible because we can't do a infinity dimensional inner product on a computer. Fortunately, kernel methods come to rescue.
+
+Kernel method is a mathematical shortcut to prevent computing inner product directly. For example, consider the quadratic transformation mentioned previously, the inner product of \(\Phi(\mathbf{x})\) and \(\Phi(\mathbf{y})\) is
+\begin{align*}
+  \langle \Phi(\mathbf{x}), \Phi(\mathbf{y}) \rangle &= {\Phi(\mathbf{x})}^T \Phi(\mathbf{y}) \\
+      &= x_1^2 y_1^2 + x_2^2 y_2^2 + 2 x_1 x_2 y_1 y_2 + 2 x_1 y_1 + 2 x_2 y_2 + 1 \\
+      &= {(\mathbf{x}^T\mathbf{y} + 1)}^2 = {(\langle \mathbf{x}, \mathbf{x} \rangle + 1)}^2
+\end{align*}
+It implies that we can define the higher dimensional space's inner product by the simpler inner product in the original space, which successfully prevents the computational complexity. We hence define the kernel function, we will give a more rigorous definition later, by
+\[
+  K(\mathbf{x}_1, \mathbf{x_2}) = \langle \Phi(\mathbf{x_1}), \Phi(\mathbf{x_2}) \rangle
+\]
+
+As long as we can represent the transformed space inner product by original space inner product, we can have both the sophisticated hypothesis and computational feasibility. We then call this the ``Kernel Trick''.
 
 \section{Common Kernel}
 \subsection{Hilber Space and RKHS}
@@ -122,7 +133,7 @@ Let \( d=2 \), so we get the special case of the quadratic kernel
 \]
 From this it follows that the feature map is given by:
 \[
-\Phi_{2}(x) = \langle x_{n}^{2},\dots,x_{1}^{2},\sqrt{2}x_{n}x_{n-1},\dots,\sqrt{2}x_{n}x_{1},\sqrt{2}x_{n-1}x_{n-2},\dots,\sqrt{2c}x_{n},\dots,\sqrt{2c}x_{1},c \rangle
+  \Phi_{2}(x) = (x_{n}^{2},\dots,x_{1}^{2},\sqrt{2}x_{n}x_{n-1},\dots,\sqrt{2}x_{n}x_{1},\sqrt{2}x_{n-1}x_{n-2},\dots,\sqrt{2c}x_{n},\dots,\sqrt{2c}x_{1},c)
 \]
 
 
