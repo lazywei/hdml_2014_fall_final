@@ -82,11 +82,11 @@ Note that a straight line in the special space actually corresponds to a quadrat
 \subsection{Kernel Trick}
 While feature transformation seems promising --- the model can be extremely sophisticated as long as we make the dimension of the transformed space higher --- the price is the expensive computational cost. The computational difficulty also makes the infinity dimensional transformation impossible because we can't do a infinity dimensional inner product on a computer. Fortunately, kernel methods come to rescue.
 
-Kernel method is a mathematical shortcut to prevent computing inner product directly. For example, consider the quadratic transformation mentioned previously, the inner product of \(\Phi(\mathbf{x})\) and \(\Phi(\mathbf{y})\) is
+Kernel method is a mathematical shortcut for preventing computing inner product directly. For example, consider the quadratic transformation mentioned previously, the inner product of \(\Phi(\mathbf{x})\) and \(\Phi(\mathbf{y})\) is
 \begin{align*}
   \langle \Phi(\mathbf{x}), \Phi(\mathbf{y}) \rangle &= {\Phi(\mathbf{x})}^T \Phi(\mathbf{y}) \\
       &= x_1^2 y_1^2 + x_2^2 y_2^2 + 2 x_1 x_2 y_1 y_2 + 2 x_1 y_1 + 2 x_2 y_2 + 1 \\
-      &= {(\mathbf{x}^T\mathbf{y} + 1)}^2 = {(\langle \mathbf{x}, \mathbf{x} \rangle + 1)}^2
+      &= {(\mathbf{x}^T\mathbf{y} + 1)}^2 = {(\langle \mathbf{x}, \mathbf{y} \rangle + 1)}^2
 \end{align*}
 It implies that we can define the higher dimensional space's inner product by the simpler inner product in the original space, which successfully prevents the computational complexity. We hence define the kernel function, we will give a more rigorous definition later, by
 \[
@@ -96,7 +96,7 @@ It implies that we can define the higher dimensional space's inner product by th
 As long as we can represent the transformed space inner product by original space inner product, we can have both the sophisticated hypothesis and computational feasibility. We then call this the ``Kernel Trick''.
 
 \section{Common Kernel}
-\subsection{Hilber Space and RKHS}
+\subsection{Hilber Space}
 \begin{definition}[Inner Product Space]
   An inner product space \(\mathcal{X}\) is a vector space with an associated inner product \(\langle \cdot,\cdot \rangle: \mathcal{X} \rightarrow \mathbb{R}\) that satisfies:
   \begin{itemize}
@@ -116,8 +116,24 @@ As long as we can represent the transformed space inner product by original spac
 \end{definition}
 
 The interval \([0, 1]\), the reals \(\mathbb{R}\), the complex numbers \(\mathbb{C}\) and Euclidean spaces \(\mathbb{R}^D\) are all Hilber spaces.
+
 \subsection{Kernel Function}
-Just for temporal note: Maybe state and discuss Mercer's condition here.
+
+\begin{definition}[Reproducing Kernel Function and RKHS]
+  Let \(\mathcal{X}\) be an arbitrary set and \(F\) a Hilbert space over \(X\). The function \(K: \mathcal{X} \times \mathcal{X} \rightarrow \mathbb{R}\) is a reproducing kernel of \(\mathcal{F}\) if
+  \begin{itemize}
+    \item For every \(\mathbf{x} \in \mathcal{X}\), the function \(f_{\mathbf{x}}(\cdot) = K(\cdot, \mathbf{x})\) is in \(\mathcal{F}\).
+    \item Reproducing Property: for every \(\mathbf{z} \in \mathcal{X}\) and every \(f \in \mathcal{F}\)
+      \[
+        f(\mathbf{z}) = {\langle f, K(\cdot, \mathbf{z}) \rangle}_{\mathcal{F}}
+      \]
+  \end{itemize}
+  Further, the space is called a Reproducing Kernel Hilbert Space (RKHS).
+\end{definition}
+
+Note: why is reproducing property important?
+Note: Maybe state and discuss Mercer's condition here.
+
 \subsection{Polynomial Kernel}
 The polynomial kernel is defined as
 \[
