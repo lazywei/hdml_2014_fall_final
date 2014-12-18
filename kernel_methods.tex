@@ -154,6 +154,23 @@ From this it follows that the feature map is given by:
 
 
 \subsection{Gaussian Kernel}
+The Gaussian Kernel is defined as
+\[
+  K(x, y) = \exp(-\gamma{\| x-y \|}^{2}), \text{with \( \gamma > 0\)}
+\]
+
+For \(\gamma = 1\)
+\begin{equation}
+  \begin{split}
+      K(x, y) &= \exp({\| x-y \|}^{2}) \\
+              &= \exp(-{(x)}^{2})\exp(-{(y)}^{2})\exp({(2xy)}) \\
+              &\stackrel{*}{=} \exp(-{(x)}^{2})\exp(-{(y)}^{2})(\sum_{i=0}^{\infty}\frac{{(2xy)}^{i}}{i!}) \\
+              &= \sum_{i=0}^{\infty}(\exp(-{(x)}^{2}\sqrt\frac{2^{i}}{i!}){(x)}^{i})(\exp(-{(y)}^{2}\sqrt\frac{2^{i}}{i!}){(y)}^{i}) \\
+              &= \Phi{(x)}^{T}\Phi(y)\\
+  \end{split}
+\end{equation}
+
+So we got\(\Phi(x) = \exp(-{(x)}^{2})(1, \sqrt\frac{2}{1!}x, \sqrt\frac{2^{2}}{2!}x^{2}, \dots)\) with infinite dimensional
 
 \section{Kernel Machines}
 \subsection{Kernel PCA}
