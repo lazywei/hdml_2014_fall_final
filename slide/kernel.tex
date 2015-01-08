@@ -107,8 +107,6 @@
 
 \section{Common Kernel}
 
-\subsection{}
-
 \begin{frame}[fragile]{Polynomial Kernel}
 
   \begin{block}{Polynomial Kernel}
@@ -168,178 +166,48 @@
   \end{block}
 \end{frame}
 
-
-
 \section{Kernel Machines}
-\section{Conclusion}
 
-\begin{frame}[fragile]
-  \frametitle{mtheme}
+\begin{frame}[fragile]{Kernel Ridge Regression}
+  \begin{block}{Ridge Regression}
+    Minimize the quadratic cost as well as the regularization term
+    \[
+      C(\mathbf{w}) = \frac{1}{2} \sum_{i} {(y_i - \mathbf{w}^T\mathbf{x}_i)}^2 + \frac{1}{2} \lambda {\| \mathbf{w} \|}^2
+    \]
 
-  The \emph{mtheme} is a Beamer theme with minimal visual noise inspired by the
-  \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
-  Theme} by Benjamin Weiss.
-
-  Enable the theme by loading
-
-  \begin{minted}[fontsize=\small]{latex}
-    \documentclass{beamer}
-    \usetheme{m}
-  \end{minted}
-
-  Note, that you have to have Mozilla's \emph{Fira Sans} font and XeTeX
-  installed to enjoy this wonderful typography.
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Sections}
-  Sections group slides of the same topic
-
-  \begin{minted}[fontsize=\small]{latex}
-    \section{Elements}
-  \end{minted}
-
-  for which the \emph{mtheme} provides a nice progress indicator \ldots
-\end{frame}
-
-\section{Elements}
-
-\begin{frame}[fragile]
-  \frametitle{Typography}
-      \begin{minted}[fontsize=\small]{latex}
-The theme provides sensible defaults to \emph{emphasize}
-text, \alert{accent} parts or show \textbf{bold} results.
-      \end{minted}
-
-  \begin{center}becomes\end{center}
-
-  The theme provides sensible defaults to \emph{emphasize} text,
-  \alert{accent} parts or show \textbf{bold} results.
-\end{frame}
-\begin{frame}{Lists}
-  \begin{columns}[onlytextwidth]
-    \column{0.5\textwidth}
-      Items
-      \begin{itemize}
-        \item Milk \item Eggs \item Potatos
-      \end{itemize}
-
-    \column{0.5\textwidth}
-      Enumerations
-      \begin{enumerate}
-        \item First, \item Second and \item Last.
-      \end{enumerate}
-  \end{columns}
-\end{frame}
-\begin{frame}{Descriptions}
-  \begin{description}
-    \item[PowerPoint] Meeh.
-    \item[Beamer] Yeeeha.
-  \end{description}
-\end{frame}
-\begin{frame}{Animation}
-  \begin{itemize}[<+- | alert@+>]
-    \item \alert<4>{This is\only<4>{ really} important}
-    \item Now this
-    \item And now this
-  \end{itemize}
-\end{frame}
-\begin{frame}{Figures}
-  \begin{figure}
-    \newcounter{density}
-    \setcounter{density}{20}
-    \begin{tikzpicture}
-      \def\couleur{mLightBrown}
-      \path[coordinate] (0,0)  coordinate(A)
-                  ++( 90:5cm) coordinate(B)
-                  ++(0:5cm) coordinate(C)
-                  ++(-90:5cm) coordinate(D);
-      \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
-      \foreach \x in {1,...,40}{%
-          \pgfmathsetcounter{density}{\thedensity+20}
-          \setcounter{density}{\thedensity}
-          \path[coordinate] coordinate(X) at (A){};
-          \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
-                              -- (C) coordinate[pos=.10](B)
-                              -- (D) coordinate[pos=.10](C)
-                              -- (X) coordinate[pos=.10](D);
-          \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
-      }
-    \end{tikzpicture}
-    \caption{Rotated square from
-    \href{http://www.texample.net/tikz/examples/rotated-polygons/}{texample.net}.}
-  \end{figure}
-\end{frame}
-\begin{frame}{Tables}
-  \begin{table}
-    \caption{Largest cities in the world (source: Wikipedia)}
-    \begin{tabular}{lr}
-      \toprule
-      City & Population\\
-      \midrule
-      Mexico City & 20,116,842\\
-      Shanghai & 19,210,000\\
-      Peking & 15,796,450\\
-      Istanbul & 14,160,467\\
-      \bottomrule
-    \end{tabular}
-  \end{table}
-\end{frame}
-\begin{frame}{Blocks}
-
-  \begin{block}{This is a block title}
-    This is soothing.
+    We have analytic solution
+    \[
+      \mathbf{w} = {(\lambda \mathbf{I} + \sum_{i} \mathbf{x}_i \mathbf{x}_i^T )}^{-1} (\sum_{j} y_j \mathbf{x}_j)
+    \]
   \end{block}
-
-\end{frame}
-\begin{frame}{Math}
-  \begin{equation*}
-    e = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
-  \end{equation*}
-\end{frame}
-\begin{frame}{Line plots}
-  \begin{figure}
-    \begin{tikzpicture}
-      \begin{axis}[
-        mlineplot,
-        width=0.9\textwidth,
-        height=6cm,
-      ]
-
-        \addplot {sin(deg(x))};
-        \addplot+[samples=100] {sin(deg(2*x))};
-
-      \end{axis}
-    \end{tikzpicture}
-  \end{figure}
-\end{frame}
-\begin{frame}{Bar charts}
-  \begin{figure}
-    \begin{tikzpicture}
-      \begin{axis}[
-        mbarplot,
-        xlabel={Foo},
-        ylabel={Bar},
-        width=0.9\textwidth,
-        height=6cm,
-      ]
-
-      \addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
-      \addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
-      \addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
-
-      \legend{lorem, ipsum, dolor}
-
-      \end{axis}
-    \end{tikzpicture}
-  \end{figure}
-\end{frame}
-\begin{frame}{Quotes}
-  \begin{quote}
-    Veni, Vidi, Vici
-  \end{quote}
 \end{frame}
 
+\begin{frame}[fragile]{Kernel Ridge Regression Cont.}
+  \begin{block}{Plug the Kernel Function In}
+    Note that
+    \[
+      {(P^{-1} + B^T R^{-1} B)}^{-1} B^T R^{-1} = PB^T {(BPB^T + R)}^{-1}
+    \]
+
+    Therefore,
+    \begin{align*}
+      \mathbf{w} &= {(\lambda \mathbf{I} + \sum_{i} \phi(\mathbf{x}_i) {\phi(\mathbf{x}_i)}^T )}^{-1} (\sum_{j} y_j \phi(\mathbf{x}_j)) \\
+                &= {(\lambda \mathbf{I} + \Phi \Phi^T) }^{-1} \Phi \mathbf{y} \\
+                &= \Phi {(\Phi^T \Phi + \lambda I)}^{-1} \mathbf{y}
+    \end{align*}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Kernel Ridge Regression Cont.}
+  \begin{block}{Prediction}
+    In the prediction stage, we first transform \( \phi(\mathbf{x}_{test}) \)
+    \[
+      y = \mathbf{w}^T \phi(\mathbf{x}_{test}) = \mathbf{y}^T {(\Phi^T \Phi + \lambda I)}^{-T} {\Phi}^T \phi(\mathbf{x}_{test})
+    \]
+
+    All the calculation can be done in terms of inner product, and hence we can apply the kernel trick.
+  \end{block}
+\end{frame}
 
 \section{Conclusion}
 
