@@ -126,14 +126,13 @@
   \begin{block}{Quadratic Transformation as An Special Case}
     Let \( d=2 \), the transformation
     \begin{align*}
-      \Phi_{2}(x) &= (x_{n}^{2}, \dots, x_{1}^{2}, \sqrt{2}x_{n}x_{n-1}, \\
-                  &\dots, \sqrt{2}x_{n}x_{1}, \sqrt{2}x_{n-1}x_{n-2}, \dots, \\
+      \Phi_{2}(x) =& (x_{n}^{2}, \dots, x_{1}^{2}, \sqrt{2}x_{n}x_{n-1}, \dots, \sqrt{2}x_{n}x_{1}, \sqrt{2}x_{n-1}x_{n-2}, \dots, \\
                   &\sqrt{2c}x_{n}, \dots, \sqrt{2c}x_{1}, c)
     \end{align*}
     And the kernel function
     \begin{align*}
-      K(x, y) &= (\sum_{i=1}^{n} x_{i}y_{i} + \alpha)^{2} = \sum_{i=1}^{n}(x_{i}^{2})(y_{i}^{2}) + \\
-              &\sum_{i=2}^{n}\sum_{j=1}^{i-1}(\sqrt{2}x_{i}x_{j})(\sqrt{2}y_{i}y_{j}) + \sum_{i=1}^{n}(\sqrt{2c}x_{i})(\sqrt{2c}y_{i})
+      K(x, y) &= (\sum_{i=1}^{n} x_{i}y_{i} + \alpha)^{2} \\
+            &= \sum_{i=1}^{n}x_{i}^{2}y_{i}^{2} + \sum_{i=2}^{n}\sum_{j=1}^{i-1}(\sqrt{2}x_{i}x_{j})(\sqrt{2}y_{i}y_{j}) + \sum_{i=1}^{n}(\sqrt{2c}x_{i})(\sqrt{2c}y_{i})
     \end{align*}
   \end{block}
 \end{frame}
@@ -156,9 +155,9 @@
     \begin{equation}
       \begin{split}
           K(x, y) &= \exp({\| x-y \|}^{2}) \\
-                  &= \exp(-{(x)}^{2})\exp(-{(y)}^{2})\exp({(2xy)}) \\
-                  &\stackrel{*}{=} \exp(-{(x)}^{2})\exp(-{(y)}^{2})(\sum_{i=0}^{\infty}\frac{{(2xy)}^{i}}{i!}) \\
-                  &= \sum_{i=0}^{\infty}(\exp(-{(x)}^{2}\sqrt\frac{2^{i}}{i!}){(x)}^{i})(\exp(-{(y)}^{2}\sqrt\frac{2^{i}}{i!}){(y)}^{i}) \\
+                  &= \exp(-{x}^{2})\exp(-{y}^{2})\exp({2xy}) \\
+                  &= \exp(-{x}^{2})\exp(-{y}^{2})(\sum_{i=0}^{\infty}\frac{{(2xy)}^{i}}{i!}) \\
+                  &= \sum_{i=0}^{\infty}(\exp(-{x}^{2}\sqrt\frac{2^{i}}{i!}){x}^{i})(\exp(-{y}^{2}\sqrt\frac{2^{i}}{i!}){y}^{i}) \\
                   &= \Phi{(x)}^{T}\Phi(y)\\
       \end{split}
     \end{equation}
@@ -169,6 +168,35 @@
 \section{Kernel Machines}
 
 \begin{frame}[fragile]{Kernel SVM}
+  \begin{block}{Soft Margin SVM dual}
+    \[
+      \max_{\forall \alpha \geq 0, \forall \beta \geq 0}\big(\min_{b, w} \frac{1}{2}{w}^{T}w + C\sum_{n=1}^{N}{\xi}_{n} + \sum_{n=1}^{N} {\alpha}_{n}(1-{\xi}_{n}-{y}_{n}({w}^{T}{z}_{n} + b)) + \sum_{n=1}^{N}{\beta}_{n}(-\xi)\big)
+    \]
+    
+    by KKT condition
+    \[
+      \max_{\forall 0 \leq \alpha \leq C, {\beta}_{n} = C-\alpha_{n}} -\frac{1}{2}\sum_{n=1}^{N}{||{\alpha}_{n}y_{n}x_{n}||}^{2} + \sum_{n=1}^{N}{\alpha}_{n}
+    \]
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Kernel SVM Cont.}
+  \begin{block}{Soft Margin SVM dual}
+    Unfold formula and multiply -1.
+    \[
+      \min_{\alpha} \frac{1}{2}\sum_{n=1}^{N}\sum_{m=1}^{N}{\alpha}_{n}{\alpha}_{m}y_{n}y_{m}{\color{red}{x_{n}}^{T}x_{m}} - \sum_{n=1}^{N}{\alpha}_{n}
+    \]
+    
+    \[
+      \text{subject to  } \sum_{n=1}^{N}y_n{\alpha}_{n} = 0 \text{; } {\alpha}_{n} \geq 0 \text{, } \forall n \in [0,N] \text{, } n \in \mathbb{N}
+    \]
+
+    \[
+      \text{implicitly  } w =\sum_{n=1}^{N}{\alpha}_{n}y_{n}x_{n} \text{; } {\beta}_{n} = C - \alpha_{n} \text{, } \forall n \in [0,N] \text{, } n \in \mathbb{N}
+    \]
+    We can do kernel method on red side \({\color{red}{x_{n}}^{T}x_{m}}\)
+ 
+  \end{block}
 \end{frame}
 
 \begin{frame}[fragile]{Kernel Ridge Regression}
