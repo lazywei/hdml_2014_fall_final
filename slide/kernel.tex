@@ -1,6 +1,6 @@
 \documentclass[10pt, compress]{beamer}
 
-\usetheme{m}
+\usetheme[titleprogressbar]{m}
 
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
@@ -10,15 +10,168 @@
 
 \usemintedstyle{trac}
 
-\title{A modern beamer theme}
+\title{Kernel Methods}
 \subtitle{}
 \date{\today}
-\author{Matthias Vogelgesang}
-\institute{Institute or miscellaneous information}
+\author{Chih-Wei Chang \and Chung-Yen Hung}
+\institute{Department of Mathematics, National Taiwan University}
 
 \begin{document}
 
 \maketitle
+
+\section{Introduction}
+
+\begin{frame}[fragile]
+  \frametitle{Motivation}
+
+  \begin{block}{Linear Model}
+    \begin{enumerate}
+      \item Simple and Well Studied
+      \item Computationally Feasible
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{Real-world Problems}
+    \begin{enumerate}
+      \item Non Linear
+      \item Sophisticated Interdependencies
+    \end{enumerate}
+  \end{block}
+
+  \begin{description}
+    \item[Question] Can we apply \textbf{Linear Model} on \textbf{Real-world Problems}?
+  \end{description}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Motivation Cont.}
+
+  \begin{block}{How about \textbf{Feature Transform}?}
+    Mapping features to higher dimensional space. For example, the quadratic transformation from \(\mathbb{R}^2\) to \(\mathbb{R}^6\)
+    \[
+      \Phi: (x_1, x_2) \mapsto (x_1^2, x_2^2, \sqrt{2} x_1 x_2, \sqrt{2} x_1, \sqrt{2} x_2, 1).
+    \]
+
+    Line in \(\mathbb{R}^6\) corresponds to quadratic curve in \(\mathbb{R}^2\).
+    Common techniques in the machine learning world.
+
+    \begin{description}[<+- | alert@+>]
+      \item[Learning Stage] Fit linear model \(h: \mathbb{R}^6 \rightarrow \{0, 1\} \) on \(\Phi(\mathbf{x})\).
+      \item[Testing Stage] \(h(\Phi(\mathbf{x}_{test}))\) gives the prediction.
+    \end{description}
+
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Motivation Cont.}
+
+  However \dots
+  \begin{description}[<+- | alert@+>]
+    \item[Pros] Fitting complicated underlying rules -- the higher the dimension, the more powerful the model.
+    \item[Cons] Extra computational costs, e.g., inner products -- the higher the dimension, the harder the computation.
+  \end{description}
+\end{frame}
+
+
+\begin{frame}[fragile]{Kernel Trick}
+
+  Luckily, \textbf{Kernel Trick} comes to rescue \dots
+  \begin{enumerate}[<+- | alert@+>]
+    \item Mathematical shortcut for preventing computing inner product directly.
+    \item Combine the favors of Linearity and Non-Linearity.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Kernel Trick Cont.}
+
+  \begin{block}{Kernel Trick}
+    Consider the inner product in the previous example
+    \begin{align*}
+      \langle \Phi(\mathbf{x}), \Phi(\mathbf{y}) \rangle &= {\Phi(\mathbf{x})}^T \Phi(\mathbf{y}) \\
+          &= x_1^2 y_1^2 + x_2^2 y_2^2 + 2 x_1 x_2 y_1 y_2 + 2 x_1 y_1 + 2 x_2 y_2 + 1 \\
+          &= {(\mathbf{x}^T\mathbf{y} + 1)}^2 = {(\langle \mathbf{x}, \mathbf{y} \rangle + 1)}^2
+    \end{align*}
+
+    It implies we can define a special function
+    \[
+      K(\mathbf{x}_1, \mathbf{x_2}) = \langle \Phi(\mathbf{x_1}), \Phi(\mathbf{x_2}) \rangle,
+    \]
+    which is the so-called kernel function.
+
+  \end{block}
+
+\end{frame}
+
+\section{Common Kernel}
+
+\subsection{}
+
+\begin{frame}[fragile]{Polynomial Kernel}
+
+  \begin{block}{Polynomial Kernel}
+
+    Suppose we use the polynomial feature transformation \( \Phi_{d}(x) \), which collects all the possible coefficients in the \(d\)-degree polynomial.
+
+    We then have the polynomial kernel
+    \[
+      K_{\Phi_{d}}(x, y) = {(\langle x,y \rangle + \alpha)}^{d}
+    \]
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Polynomial Kernel Cont.}
+
+  \begin{block}{Quadratic Transformation as An Special Case}
+    Let \( d=2 \), the transformation
+    \begin{align*}
+      \Phi_{2}(x) &= (x_{n}^{2}, \dots, x_{1}^{2}, \sqrt{2}x_{n}x_{n-1}, \\
+                  &\dots, \sqrt{2}x_{n}x_{1}, \sqrt{2}x_{n-1}x_{n-2}, \dots, \\
+                  &\sqrt{2c}x_{n}, \dots, \sqrt{2c}x_{1}, c)
+    \end{align*}
+    And the kernel function
+    \begin{align*}
+      K(x, y) &= (\sum_{i=1}^{n} x_{i}y_{i} + \alpha)^{2} = \sum_{i=1}^{n}(x_{i}^{2})(y_{i}^{2}) + \\
+              &\sum_{i=2}^{n}\sum_{j=1}^{i-1}(\sqrt{2}x_{i}x_{j})(\sqrt{2}y_{i}y_{j}) + \sum_{i=1}^{n}(\sqrt{2c}x_{i})(\sqrt{2c}y_{i})
+    \end{align*}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Gaussian Kernel}
+
+  \begin{block}{Gaussian Kernel}
+    The Gaussian Kernel is defined as
+    \[
+      K(x, y) = \exp(-\gamma{\| x-y \|}^{2}), \text{with \( \gamma > 0\)}
+    \]
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Gaussian Kernel Cont.}
+  \begin{block}{As An Extreme Case of Polynomial Kernel}
+    For \(\gamma = 1\)
+    \begin{equation}
+      \begin{split}
+          K(x, y) &= \exp({\| x-y \|}^{2}) \\
+                  &= \exp(-{(x)}^{2})\exp(-{(y)}^{2})\exp({(2xy)}) \\
+                  &\stackrel{*}{=} \exp(-{(x)}^{2})\exp(-{(y)}^{2})(\sum_{i=0}^{\infty}\frac{{(2xy)}^{i}}{i!}) \\
+                  &= \sum_{i=0}^{\infty}(\exp(-{(x)}^{2}\sqrt\frac{2^{i}}{i!}){(x)}^{i})(\exp(-{(y)}^{2}\sqrt\frac{2^{i}}{i!}){(y)}^{i}) \\
+                  &= \Phi{(x)}^{T}\Phi(y)\\
+      \end{split}
+    \end{equation}
+    It implies \(\Phi(x) = \exp(-{(x)}^{2})(1, \sqrt\frac{2}{1!}x, \sqrt\frac{2^{2}}{2!}x^{2}, \dots)\).
+  \end{block}
+\end{frame}
+
+
+
+\section{Kernel Machines}
+\section{Conclusion}
 
 \begin{frame}[fragile]
   \frametitle{mtheme}
