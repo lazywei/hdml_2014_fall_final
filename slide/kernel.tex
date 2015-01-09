@@ -172,7 +172,6 @@
     \[
       \max_{\forall \alpha \geq 0, \forall \beta \geq 0}\big(\min_{b, w} \frac{1}{2}{w}^{T}w + C\sum_{n=1}^{N}{\xi}_{n} + \sum_{n=1}^{N} {\alpha}_{n}(1-{\xi}_{n}-{y}_{n}({w}^{T}{z}_{n} + b)) + \sum_{n=1}^{N}{\beta}_{n}(-\xi)\big)
     \]
-    
     by KKT condition
     \[
       \max_{\forall 0 \leq \alpha \leq C, {\beta}_{n} = C-\alpha_{n}} -\frac{1}{2}\sum_{n=1}^{N}{||{\alpha}_{n}y_{n}x_{n}||}^{2} + \sum_{n=1}^{N}{\alpha}_{n}
@@ -186,7 +185,7 @@
     \[
       \min_{\alpha} \frac{1}{2}\sum_{n=1}^{N}\sum_{m=1}^{N}{\alpha}_{n}{\alpha}_{m}y_{n}y_{m}{\color{red}{x_{n}}^{T}x_{m}} - \sum_{n=1}^{N}{\alpha}_{n}
     \]
-    
+
     \[
       \text{subject to  } \sum_{n=1}^{N}y_n{\alpha}_{n} = 0 \text{; } {\alpha}_{n} \geq 0 \text{, } \forall n \in [0,N] \text{, } n \in \mathbb{N}
     \]
@@ -195,7 +194,7 @@
       \text{implicitly  } w =\sum_{n=1}^{N}{\alpha}_{n}y_{n}x_{n} \text{; } {\beta}_{n} = C - \alpha_{n} \text{, } \forall n \in [0,N] \text{, } n \in \mathbb{N}
     \]
     We can do kernel method on red side \({\color{red}{x_{n}}^{T}x_{m}}\)
- 
+
   \end{block}
 \end{frame}
 
@@ -244,15 +243,11 @@
 
 \begin{frame}{Summary}
 
-  Get the source of this theme and the demo presentation from
-
-  \begin{center}\url{github.com/matze/mtheme}\end{center}
-
-  The theme \emph{itself} is licensed under a
-  \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
-  Attribution-ShareAlike 4.0 International License}.
-
-  \begin{center}\ccbysa\end{center}
+  \begin{itemize}
+    \item Linear to Non-linear
+    \item Computationally Feasible
+    \item Ability to Fit Arbitrarily Complicated Model
+  \end{itemize}
 
 \end{frame}
 
